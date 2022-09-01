@@ -1,0 +1,6 @@
+.asset_status {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2px;
+  align-items: baseline;
+}

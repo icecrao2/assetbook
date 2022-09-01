@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@400;800&display=swap');
+
+
+.medium_title {
+  font-family: 'Hahmlet', serif;    
+  font-size: 40px;
+  text-align: center;
+  margin-bottom: 15px;
+}

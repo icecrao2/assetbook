@@ -1,0 +1,7 @@
+.card{
+  border:1px solid black;
+  min-width:250px;
+  flex-basis:400px;
+  flex-shrink:1;
+  flex-grow:1;
+}

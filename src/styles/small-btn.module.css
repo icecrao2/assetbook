@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@400;800&display=swap');
+
+
+.btn {
+  font-family: 'Hahmlet', serif;
+  border:none;
+  background-color: aquamarine;
+  border-radius: 5px;
+  width: 45px;
+  height: 25px;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.btn:hover{
+  cursor:pointer;
+}
