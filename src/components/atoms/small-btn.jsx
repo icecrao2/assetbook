@@ -1,11 +1,11 @@
 import styles from '../../styles/small-btn.module.css';
 
 
-const Small_btn = ({ content }) => {
+const Small_btn = ({ content, onClick }) => {
 
 
   return (
-    <button className={styles.btn}>{content}</button>
+    <button onClick={onClick} className={styles.btn}>{content}</button>
   );
 }
 

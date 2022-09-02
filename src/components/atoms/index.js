@@ -7,3 +7,4 @@ export * from './small-btn.jsx';
 export * from './chart-bar.jsx';
 export * from './chart-doughnut.jsx';
 export * from './small-anchor.jsx';
+export * from './small-category.jsx';
