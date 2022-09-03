@@ -29,7 +29,7 @@ const Chart_doughnut = ({ plugins, data, chartStyles }) => {
 
 
 
-  let options = {
+  const options = {
     responsive: true,
     legend: {
       display: true
@@ -41,9 +41,6 @@ const Chart_doughnut = ({ plugins, data, chartStyles }) => {
 
     },
   };
-
-
-
 
   return (
     <div style={chartStyles}>

@@ -13,6 +13,10 @@ import {
 import styles from '../../styles/view_account_book.module.css';
 import main_category from '../../json/main-category.js';
 import { inputs } from '../../hooks';
+import getDoughnutPlugin from '../../utils/doughnut-center-text.js';
+import {getDoughnutChartData} from '../../utils/chart-data.js';
+import colors from '../../json/colors.js';
+
 
 const View_Cashbook = ({ }) => {
 
@@ -40,76 +44,27 @@ const View_Cashbook = ({ }) => {
 
 
   const data = [
-    {
-      labels: [...detailCategory.import],
-      datasets: [
-        {
-          data: [40, 100, 300, 400, 500],
-          backgroundColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(20, 66, 10, 1)',
-            'rgba(20, 255, 10, 1)',
-            'rgba(255, 255, 10, 1)',
-            'rgba(20, 66, 255, 1)'
-          ],
-          cutout: "70%",
-        }
-      ]
-    },
-    {
-      labels: [...detailCategory.export],
-      datasets: [
-        {
-          data: [40, 100, 300, 400],
-          backgroundColor: [
-            'black',
-            'gray',
-            'rgba(20, 255, 10, 1)',
-            'rgba(255, 255, 10, 1)'
-          ],
-          cutout: "70%",
-        }
-      ]
-    }
+    getDoughnutChartData(
+        [...detailCategory.import],
+        [40, 100, 300, 400, 500], 
+        Object.keys(colors.cash.import).map((item) => {
+          return colors[item];
+        }), 
+        '70%'
+    ),
+    getDoughnutChartData(
+        [...detailCategory.export],
+        [100, 200, 80, 350], 
+        Object.keys(colors.cash.export).map((item) => {
+          return colors[item];
+        }), 
+        '70%'
+    )
   ]
 
-  const plugins = [[
-    {
-      beforeDraw: function(chart) {
-        var width = chart.width,
-          height = chart.height,
-          ctx = chart.ctx;
-        ctx.restore();
-        var fontSize = (height / 160).toFixed(2);
-        ctx.font = fontSize + "em sans-serif";
-        ctx.textBaseline = "top";
-        var text = cashCategory[0],
-          textX = Math.round((width - ctx.measureText(text).width) / 2),
-          textY = height / 2;
-        ctx.fillText(text, textX, textY);
-        ctx.save();
-      }
-    }
-  ],
-  [
-    {
-      beforeDraw: function(chart) {
-        var width = chart.width,
-          height = chart.height,
-          ctx = chart.ctx;
-        ctx.restore();
-        var fontSize = (height / 160).toFixed(2);
-        ctx.font = fontSize + "em sans-serif";
-        ctx.textBaseline = "top";
-        var text = cashCategory[1],
-          textX = Math.round((width - ctx.measureText(text).width) / 2),
-          textY = height / 2;
-        ctx.fillText(text, textX, textY);
-        ctx.save();
-      }
-    }
-  ]
-  ];
+  const plugins = [getDoughnutPlugin(cashCategory[0]), getDoughnutPlugin(cashCategory[1])];
+
+
 
   const onChange = [
     (evt) => setImportText(() => evt.target.value),

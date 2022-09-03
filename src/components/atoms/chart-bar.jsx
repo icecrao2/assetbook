@@ -21,23 +21,24 @@ ChartJS.register(
 );
 
 
-export const options = {
-  responsive: true,
-  legend: {
-    display: true
-  },
-  plugins: {
-    mode: "dataset"
-  },
-  maintainAspectRatio: false,
-  scales: {
-
-  },
-};
 
 
 
 const Chart_bar = ({ data, chartStyles }) => {
+
+  const options = {
+    responsive: true,
+    legend: {
+      display: true
+    },
+    plugins: {
+      mode: "dataset"
+    },
+    maintainAspectRatio: false,
+    scales: {
+
+    },
+  };
 
 
 

@@ -9,10 +9,15 @@ import {
 
 import styles from '../../styles/view_account_book.module.css';
 import main_category from '../../json/main-category.js';
+import asset_category from '../../json/asset-category.js';
+import colors from '../../json/colors.js';
+import getDoughnutPlugin from '../../utils/doughnut-center-text.js';
+import {getDoughnutChartData} from '../../utils/chart-data.js';
 
 const View_AccountBook = ({ }) => {
 
-  const labels = ['현금', '저축', '투자', '부채'];
+  const labels = main_category.title;
+  const centerText = asset_category.title;
   const chartStyles = {
     position: "relative",
     flexShrink: '1',
@@ -20,68 +25,34 @@ const View_AccountBook = ({ }) => {
     marginLeft: '100px',
     width: '500px',
   }
-  const data = {
-    labels,
-    datasets: [
-      {
-        label: '자산 현황',
-        data: [40, 100, 300, 400],
-        backgroundColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(20, 66, 10, 1)',
-          'rgba(20, 255, 10, 1)',
-          'rgba(20, 66, 255, 1)'
-        ],
-        cutout: "70%",
-      },
-    ],
-  }
-
-  const centerText = ["자산", "목표"];
-  const plugins = [[
-    {
-      beforeDraw: function(chart) {
-        var width = chart.width,
-          height = chart.height,
-          ctx = chart.ctx;
-        ctx.restore();
-        var fontSize = (height / 160).toFixed(2);
-        ctx.font = fontSize + "em sans-serif";
-        ctx.textBaseline = "top";
-        var text = centerText[0],
-          textX = Math.round((width - ctx.measureText(text).width) / 2),
-          textY = height / 2;
-        ctx.fillText(text, textX, textY);
-        ctx.save();
-      }
-    }
-  ],
-  [
-    {
-      beforeDraw: function(chart) {
-        var width = chart.width,
-          height = chart.height,
-          ctx = chart.ctx;
-        ctx.restore();
-        var fontSize = (height / 160).toFixed(2);
-        ctx.font = fontSize + "em sans-serif";
-        ctx.textBaseline = "top";
-        var text = centerText[1],
-          textX = Math.round((width - ctx.measureText(text).width) / 2),
-          textY = height / 2;
-        ctx.fillText(text, textX, textY);
-        ctx.save();
-      }
-    }
+  const datas = [
+    getDoughnutChartData(
+        labels,
+        [40, 100, 300, 400], 
+        Object.keys(colors.cash.import).map((item) => {
+          return colors[item];
+        }), 
+        '70%'
+    ),
+    getDoughnutChartData(
+        labels,
+        [100, 200, 80, 350], 
+        Object.keys(colors.cash.import).map((item) => {
+          return colors[item];
+        }), 
+        '70%'
+    )
   ]
-  ];
+  const plugins =    [getDoughnutPlugin(centerText[0]),
+    getDoughnutPlugin(centerText[1])];
+
 
 
   return (
     <main id="main" >
       <div className={styles.chartContainer}>
-        <Chart_doughnut chartStyles={chartStyles} data={data} plugins={plugins[0]} />
-        <Chart_doughnut chartStyles={chartStyles} data={data} plugins={plugins[1]} />
+        <Chart_doughnut chartStyles={chartStyles} data={datas[0]} plugins={plugins[0]} />
+        <Chart_doughnut chartStyles={chartStyles} data={datas[1]} plugins={plugins[1]} />
       </div>
 
       <div className={styles.cardContainer}>

@@ -6,31 +6,39 @@ import main_category from '../json/main-category.js';
 
 const Asset_displayer = ({ assets, goals, achieveRate }) => {
 
-  const setGoalCash = (evt) => {
-    goals.handleCash(evt.target.value);
-    achieveRate.handleCash(!isFinite(assets.cash / evt.target.value) ? 0 : Math.floor((assets.cash / evt.target.value) * 100));
-  }
-  const setGoalDebt = (evt) => {
-    goals.handleDebt(evt.target.value);
-    achieveRate.handleDebt(!isFinite(assets.debt / evt.target.value) ? 0 : Math.floor((assets.debt / evt.target.value) * 100));
-  }
-  const setGoalInvestment = (evt) => {
-    goals.handleInvestment(evt.target.value);
-    achieveRate.handleInvestment(!isFinite(assets.investment / evt.target.value) ? 0 : Math.floor((assets.investment / evt.target.value) * 100));
-  }
-  const setGoalSaving = (evt) => {
-    goals.handleSaving(evt.target.value);
-    achieveRate.handleSaving(!isFinite(assets.saving / evt.target.value) ? 0 : Math.floor((assets.saving / evt.target.value) * 100));
-  }
-  const setGoals = [setGoalCash, setGoalSaving, setGoalInvestment, setGoalDebt];
 
-  const labels = ['현금', '저축', '투자', '부채'];
+  const setGoals = [
+    (evt) => {
+      goals.handleCash(evt.target.value);
+      achieveRate.handleCash(!isFinite(assets.cash / evt.target.value) ?
+        0 : Math.floor((assets.cash / evt.target.value) * 100));
+    },
+    (evt) => {
+      goals.handleSaving(evt.target.value);
+      achieveRate.handleSaving(!isFinite(assets.saving / evt.target.value) ?
+        0 : Math.floor((assets.saving / evt.target.value) * 100));
+    },
+    (evt) => {
+      goals.handleInvestment(evt.target.value);
+      achieveRate.handleInvestment(!isFinite(assets.investment / evt.target.value) ?
+        0 : Math.floor((assets.investment / evt.target.value) * 100));
+    },
+
+    (evt) => {
+      goals.handleDebt(evt.target.value);
+      achieveRate.handleDebt(!isFinite(assets.debt / evt.target.value) ?
+        0 : Math.floor((assets.debt / evt.target.value) * 100));
+    }
+  ];
+
+  const labels = main_category.title;
+
   const chartStyles = {
     position: "relative",
     height: '200px',
     flexShrink: 1,
     flexGrow: 1,
-  }
+  };
 
   const data = {
     labels,
