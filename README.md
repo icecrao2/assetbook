@@ -1,5 +1,5 @@
 ## Site URL
-https://replit.com/@icecrao2/asset-book-1
+https://asset-book-1.icecrao2.repl.co/
 
 
 ## Running React on Repl.it
